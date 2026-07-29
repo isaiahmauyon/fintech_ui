@@ -1,11 +1,13 @@
 import TransactionRow from './components/TransactionRow'
-
 import TransactionRowSkeleton from './components/TransactionRowSkeleton'
 import EmptyTransactions from './components/EmptyTransactions'
+import WalletBalanceCard from './components/WalletBalanceCard'
 
 function App() {
   return (
     <div className="p-8 max-w-md mx-auto">
+      <WalletBalanceCard balance={124500.75} />
+
       <h1 className="text-2xl font-bold mb-4">Transactions</h1>
       <div className="border border-gray-100 rounded-xl overflow-hidden">
         <TransactionRow
@@ -30,6 +32,7 @@ function App() {
           status="failed"
         />
       </div>
+
       {/* Loading Skeleton Demo */}
       <div className="border border-gray-100 rounded-xl overflow-hidden mt-6">
         <TransactionRowSkeleton />
