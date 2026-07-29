@@ -1,2 +1,1 @@
-# fintech_ui
-Fintech UI components for React — wallet cards, OTP inputs, transaction rows, and other patterns fintech teams rebuild from scratch, styled with Tailwind CSS.
+A React + Tailwind CSS component library for fintech products — covering the patterns general UI libraries don't: wallet displays, OTP verification, transaction states, KYC flows, and more.
