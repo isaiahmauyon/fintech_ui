@@ -1,5 +1,8 @@
 import TransactionRow from './components/TransactionRow'
 
+import TransactionRowSkeleton from './components/TransactionRowSkeleton'
+import EmptyTransactions from './components/EmptyTransactions'
+
 function App() {
   return (
     <div className="p-8 max-w-md mx-auto">
@@ -27,8 +30,19 @@ function App() {
           status="failed"
         />
       </div>
+      {/* Loading Skeleton Demo */}
+      <div className="border border-gray-100 rounded-xl overflow-hidden mt-6">
+        <TransactionRowSkeleton />
+        <TransactionRowSkeleton />
+      </div>
+
+      <div className="border border-gray-100 rounded-xl overflow-hidden mt-6">
+        <EmptyTransactions />
+      </div>
     </div>
   )
 }
 
 export default App
+
+
