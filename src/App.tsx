@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import TransactionRow from './components/TransactionRow'
 import TransactionRowSkeleton from './components/TransactionRowSkeleton'
 import EmptyTransactions from './components/EmptyTransactions'
@@ -6,12 +7,21 @@ import OtpInput from './components/OtpInput'
 import CurrencyAmount from './components/CurrencyAmount'
 import ExchangeRateWidget from './components/ExchangeRateWidget'
 import AccountSummaryCard from './components/AccountSummaryCard'
-import { useState } from 'react'
 import TransactionDetailSheet from './components/TransactionDetailSheet'
-
+import PinPad from './components/PinPad'
+import AmountInput from './components/AmountInput'
 
 function App() {
   const [isSheetOpen, setIsSheetOpen] = useState(false)
+  const [pin, setPin] = useState('')
+
+  const handleKeyPress = (key: string) => {
+    if (pin.length < 4) setPin(pin + key)
+  }
+
+  const handleBackspace = () => {
+    setPin(pin.slice(0, -1))
+  }
 
   return (
     <div className="p-8 max-w-md mx-auto">
@@ -99,6 +109,15 @@ function App() {
         date="Today, 2:41 PM"
         reference="TXN-8823001"
       />
+      <div className="mb-6">
+        <p className="text-sm text-gray-600 mb-2">PIN: {pin}</p>
+        <PinPad onKeyPress={handleKeyPress} onBackspace={handleBackspace} />
+      </div>
+
+      <div className="mb-6 max-w-sm">
+        <p className="text-sm text-gray-600 mb-2">Enter amount</p>
+        <AmountInput onAmountChange={(amt) => console.log('Amount:', amt)} />
+      </div>
 
     </div>
   )
