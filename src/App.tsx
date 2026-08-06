@@ -10,6 +10,10 @@ import AccountSummaryCard from './components/AccountSummaryCard'
 import TransactionDetailSheet from './components/TransactionDetailSheet'
 import PinPad from './components/PinPad'
 import AmountInput from './components/AmountInput'
+import CardNumberInput from './components/CardNumberInput'
+import PhoneNumberInput from './components/PhoneNumberInput'
+import IdInput from './components/IdInput'
+
 
 function App() {
   const [isSheetOpen, setIsSheetOpen] = useState(false)
@@ -117,6 +121,20 @@ function App() {
       <div className="mb-6 max-w-sm">
         <p className="text-sm text-gray-600 mb-2">Enter amount</p>
         <AmountInput onAmountChange={(amt) => console.log('Amount:', amt)} />
+      </div>
+
+      <div className="mb-6">
+        <p className="text-sm text-gray-600 mb-2">Card number</p>
+        <CardNumberInput />
+      </div>
+
+      <div className="mb-6">
+        <p className="text-sm text-gray-600 mb-2">Phone number</p>
+        <PhoneNumberInput />
+      </div>
+
+      <div className="mb-6">
+        <IdInput idType="BVN" />
       </div>
 
     </div>
