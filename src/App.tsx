@@ -5,8 +5,14 @@ import WalletBalanceCard from './components/WalletBalanceCard'
 import OtpInput from './components/OtpInput'
 import CurrencyAmount from './components/CurrencyAmount'
 import ExchangeRateWidget from './components/ExchangeRateWidget'
+import AccountSummaryCard from './components/AccountSummaryCard'
+import { useState } from 'react'
+import TransactionDetailSheet from './components/TransactionDetailSheet'
+
 
 function App() {
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
+
   return (
     <div className="p-8 max-w-md mx-auto">
       <div className="mb-6">
@@ -59,6 +65,41 @@ function App() {
       <div className="mt-6">
         <ExchangeRateWidget rate={1400} />
       </div>
+
+
+      <div className="mb-6 max-w-sm flex flex-col gap-3">
+        <AccountSummaryCard
+          accountName="Paul Isaiah"
+          accountNumber="0123456789"
+          accountType="personal"
+          balance={124500.75}
+        />
+        <AccountSummaryCard
+          accountName="Isaiah Design Studio"
+          accountNumber="9876543210"
+          accountType="business"
+          balance={892300}
+        />
+      </div>
+
+      <button
+        onClick={() => setIsSheetOpen(true)}
+        className="mb-6 text-sm text-blue-600 font-medium"
+      >
+        View transaction detail →
+      </button>
+
+      <TransactionDetailSheet
+        isOpen={isSheetOpen}
+        onClose={() => setIsSheetOpen(false)}
+        title="Jumia Nigeria"
+        amount={12500}
+        type="debit"
+        status="success"
+        date="Today, 2:41 PM"
+        reference="TXN-8823001"
+      />
+
     </div>
   )
 }
