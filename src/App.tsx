@@ -4,7 +4,7 @@ import EmptyTransactions from './components/EmptyTransactions'
 import WalletBalanceCard from './components/WalletBalanceCard'
 import OtpInput from './components/OtpInput'
 import CurrencyAmount from './components/CurrencyAmount'
-
+import ExchangeRateWidget from './components/ExchangeRateWidget'
 
 function App() {
   return (
@@ -53,6 +53,11 @@ function App() {
 
       <div className="border border-gray-100 rounded-xl overflow-hidden mt-6">
         <EmptyTransactions />
+      </div>
+
+      {/* Exchange Rate Widget Demo */}
+      <div className="mt-6">
+        <ExchangeRateWidget rate={1400} />
       </div>
     </div>
   )
