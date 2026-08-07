@@ -13,6 +13,16 @@ import AmountInput from './components/AmountInput'
 import CardNumberInput from './components/CardNumberInput'
 import PhoneNumberInput from './components/PhoneNumberInput'
 import IdInput from './components/IdInput'
+import KycStepper from './components/KycStepper'
+import DocumentUploadCard from './components/DocumentUploadCard'
+import SelfieCaptureCard from './components/SelfieCaptureCard'
+import AccountTierIndicator from './components/AccountTierIndicator'
+import TransactionStatusBadge from './components/TransactionStatusBadge'
+import TransactionFilterBar from './components/TransactionFilterBar'
+import SettlementSummaryCard from './components/SettlementSummaryCard'
+import Skeleton from './components/Skeleton'
+import ErrorState from './components/ErrorState'
+
 
 
 function App() {
@@ -26,6 +36,8 @@ function App() {
   const handleBackspace = () => {
     setPin(pin.slice(0, -1))
   }
+  const [selfieStatus, setSelfieStatus] = useState<'idle' | 'capturing' | 'captured' | 'failed'>('idle')
+
 
   return (
     <div className="p-8 max-w-md mx-auto">
@@ -136,6 +148,70 @@ function App() {
       <div className="mb-6">
         <IdInput idType="BVN" />
       </div>
+
+      <div className="mb-6">
+        <KycStepper
+          steps={[
+            { label: 'Personal Info' },
+            { label: 'ID Verification' },
+            { label: 'Selfie' },
+            { label: 'Complete' },
+          ]}
+          currentStep={1}
+        />
+      </div>
+
+      <div className="mb-6 max-w-xs">
+        <DocumentUploadCard label="Upload ID Document" hint="JPG, PNG, or PDF, max 5MB" />
+      </div>
+
+      <div className="mb-6">
+        <SelfieCaptureCard
+          status={selfieStatus}
+          onCapture={() => setSelfieStatus('captured')}
+          onRetry={() => setSelfieStatus('idle')}
+        />
+      </div>
+      <div className="mb-6">
+        <AccountTierIndicator currentTier={1} />
+      </div>
+      <div className="flex gap-2 mb-6">
+        <TransactionStatusBadge status="success" />
+        <TransactionStatusBadge status="pending" />
+        <TransactionStatusBadge status="failed" />
+        <TransactionStatusBadge status="reversed" />
+      </div>
+
+      <div className="mb-6">
+        <TransactionFilterBar />
+      </div>
+
+      <div className="mb-6 max-w-sm flex flex-col gap-3">
+        <SettlementSummaryCard
+          totalAmount={458200}
+          transactionCount={12}
+          settlementDate="Settled 4 Aug"
+          status="processed"
+        />
+        <SettlementSummaryCard
+          totalAmount={92500}
+          transactionCount={1}
+          settlementDate="Expected 7 Aug"
+          status="scheduled"
+        />
+      </div>
+
+      <div className="mb-6 flex flex-col gap-4 max-w-sm">
+        <Skeleton variant="card" />
+        <Skeleton variant="list" rows={2} />
+        <Skeleton variant="table" rows={3} />
+      </div>
+
+      <div className="mb-6 border border-gray-100 rounded-xl">
+        <ErrorState onRetry={() => alert('Retrying...')} />
+      </div>
+
+
 
     </div>
   )
